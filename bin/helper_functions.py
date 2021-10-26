@@ -99,7 +99,12 @@ def get_submission_metadata(search_val,
 
     # create header for request to sec api (requires an email address)
 
-    """continue building function here"""
+    """
+    Continue building function here
+    Don't think current set up below is prudent -- having two functions
+    as arguments. Perfects better to have string arguments that then get passed
+    to functions operating within body of this function. Will edit this soon.
+    """
 
 test = get_submission_metadata('Apple Inc', parse_tickers, get_cik_values)
 print(test)
