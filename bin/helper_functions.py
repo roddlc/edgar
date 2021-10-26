@@ -5,11 +5,8 @@ import requests
 import os
 import sys
 import json
-
-from requests.api import get
 import utils
 
-# https://www.sec.gov/Archives/edgar/cik-lookup-data.txt
 
 """
 This script contains various helper functions for processing data via
@@ -22,6 +19,7 @@ def get_cik_values():
     Pull CIK, ticker, and company title combinations from the SEC API. This
     function leverages the link in the edgar.ini file.
     """
+
     url = utils.get_config('edgar.ini')['TICKERS']
 
     r = requests.get(url)
@@ -40,14 +38,16 @@ def parse_tickers(search_val, lookup_table, exact = True):
     Parse the tickers for specific company names (e.g., Apple, Microsoft)
 
     Args:
-        company (str): Company name as listed on stock market exchange (e.g.,
-            'Apple Inc.', 'Microsoft Corporation'
+        search_val (str): Company name as listed on stock market exchange 
+            (e.g., 'Apple Inc.', 'Microsoft Corporation').
+        lookup_table (dataframe): Table to be searched for search_val.
         exact (bool): Specifies if company name should be exact or partial
             match to company's name on stock exchange (e.g., 'Apple Inc' v.
             'Apple'). If True, match will be done on exact name. If false, 
             will peform partial match.
     
     Returns:
+        dataframe: records from lookup_table that match with search_val
 
     """
     
@@ -76,5 +76,30 @@ def parse_tickers(search_val, lookup_table, exact = True):
     return result
 
 
-test = parse_tickers('apple inc', get_cik_values)
+def get_submission_metadata(search_val,
+                            tickers,
+                            lookup_table,
+                            #user_agent, # will add this when function completed
+                            exact = True
+                            ):
+    """
+    Return a table containing the metadata for SEC submissions by the 
+    queried company.
+    """
+
+    cik_df = tickers(search_val, lookup_table, exact)
+
+    # extract ticker from cik (a dataframe)
+    cik = cik_df['cik_str'].astype(str).str.pad(10, side = 'left', fillchar = '0')
+
+
+    # build url
+    url = utils.get_config('edgar.ini')['SUBMISSIONS_BASE'] + cik[0] + '.json'
+    return url
+
+    # create header for request to sec api (requires an email address)
+
+    """continue building function here"""
+
+test = get_submission_metadata('Apple Inc', parse_tickers, get_cik_values)
 print(test)
