@@ -77,9 +77,7 @@ def parse_tickers(search_val, lookup_table, exact = True):
 
 
 def get_submission_metadata(search_val,
-                            tickers,
-                            lookup_table,
-                            #user_agent, # will add this when function completed
+                            user_agent,
                             exact = True
                             ):
     """
@@ -87,7 +85,7 @@ def get_submission_metadata(search_val,
     queried company.
     """
 
-    cik_df = tickers(search_val, lookup_table, exact)
+    cik_df = parse_tickers(search_val, get_cik_values, exact)
 
     # extract ticker from cik (a dataframe)
     cik = cik_df['cik_str'].astype(str).str.pad(10, side = 'left', fillchar = '0')
@@ -95,16 +93,22 @@ def get_submission_metadata(search_val,
 
     # build url
     url = utils.get_config('edgar.ini')['SUBMISSIONS_BASE'] + cik[0] + '.json'
-    return url
+    #return url
 
     # create header for request to sec api (requires an email address)
+    header = {'User-Agent': user_agent}
+
+    result = requests.get(url, headers = header)
+
+    # get recent filings from the json object
+    df = pd.DataFrame(result.json()['filings']['recent'])
+
+    return df
 
     """
     Continue building function here
-    Don't think current set up below is prudent -- having two functions
-    as arguments. Perfects better to have string arguments that then get passed
-    to functions operating within body of this function. Will edit this soon.
     """
 
-test = get_submission_metadata('Apple Inc', parse_tickers, get_cik_values)
-print(test)
+    # more
+
+
