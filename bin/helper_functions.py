@@ -35,7 +35,7 @@ def get_cik_values():
 
 def parse_tickers(search_val, lookup_table, exact = True):
     """
-    Parse the tickers for specific company names (e.g., Apple, Microsoft)
+    Parse the tickers for specific company names (e.g., Apple, Microsoft).
 
     Args:
         search_val (str): Company name as listed on stock market exchange 
@@ -47,7 +47,7 @@ def parse_tickers(search_val, lookup_table, exact = True):
             will peform partial match.
     
     Returns:
-        dataframe: records from lookup_table that match with search_val
+        dataframe: records from lookup_table that match with search_val.
 
     """
     
@@ -78,11 +78,28 @@ def parse_tickers(search_val, lookup_table, exact = True):
 
 def get_submission_metadata(search_val,
                             user_agent,
-                            exact = True
-                            ):
+                            exact = True):
     """
-    Return a table containing the metadata for SEC submissions by the 
+    Return a dataframe containing the metadata for SEC submissions by the 
     queried company.
+
+    Args:
+        search_val (str): Company name (e.g., 'Microsoft Corporation') to search
+        user_agent (str): Name and email to be included with data request to SEC 
+            API. This is required to submit the request. This field is formatted
+            'FirstName LastName email@domain'.
+        exact (bool, default True): Whether or not to match records along exact
+            company name match. For example, if True, 'Microsoft' will not match
+            to 'Microsoft Corporation'. On the flip side, if False, 'Apple' will match
+            to 'Apple Inc' and other companies like 'Apple Hospitality REIT, Inc.'
+    
+    Returns:
+        dataframe: The metadata for all submissions by the company to the SEC is 
+            retured as a dataframe containing information such as:
+                - accessionNumber
+                - filingDate
+                - reportDate
+                - form (e.g., 10-K, 10-Q)
     """
 
     cik_df = parse_tickers(search_val, get_cik_values, exact)
@@ -105,10 +122,7 @@ def get_submission_metadata(search_val,
 
     return df
 
-    """
-    Continue building function here
-    """
 
-    # more
+
 
 
