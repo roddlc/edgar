@@ -110,7 +110,6 @@ def get_submission_metadata(search_val,
 
     # build url
     url = utils.get_config('edgar.ini')['SUBMISSIONS_BASE'] + cik[0] + '.json'
-    #return url
 
     # create header for request to sec api (requires an email address)
     header = {'User-Agent': user_agent}

@@ -1,6 +1,10 @@
 import pandas as pd
 import numpy as np
+import requests
+from requests.api import request
 import helper_functions as hf
+import utils
+import json
 
 
 """
@@ -8,24 +12,38 @@ This script will return a dataframe containing all financial filing information
 for a given company. Currently a work in progress (as of 10/28)
 """
 
-def get_company_facts_data(search_val):
+def get_company_facts_json(search_val, user_agent):
     """
     In progress
     """
 
-    # Add request to sec api here
-    # return result
+    # get the cik number
+    cik_df = hf.parse_tickers(search_val, hf.get_cik_values, exact=True)
+
+    # use cik number acquired above to query
+    cik = cik_df['cik_str'].astype(str).str.pad(10, side = 'left', fillchar = '0')
+
+    # build url to sec company facts api
+    url = utils.get_config('edgar.ini')['COMPANY_FACTS_BASE'] + cik[0] + '.json'
+
+    # create header for request to sec api (requires an email address)
+    header = {'User-Agent': user_agent}
+
+    r = requests.get(url, headers=header)
+
+    # extract us gaap elements from data
+    gaap = r.json()['facts']['us-gaap']
 
 
-def main(search_val, ):
+
+
+def company_facts_df(search_val, user_agent):
     """
     In progress
     """
 
-    #result =  # will add
-
-
-    # facts =  # will add
+    # get json with company fact data
+    facts = get_company_facts_json(search_val, user_agent)
 
 
     # the following lists will be filled by for loop below
@@ -81,6 +99,3 @@ def main(search_val, ):
 
     return df
 
-
-
-# create 
