@@ -5,6 +5,7 @@ from requests.api import request
 import helper_functions as hf
 import utils
 import json
+import os
 
 
 """
@@ -12,13 +13,27 @@ This script will return a dataframe containing all financial filing information
 for a given company. Currently a work in progress (as of 10/28)
 """
 
-def get_company_facts_json(search_val, user_agent):
+def get_company_facts_json(search_val, user_agent, exact = True):
     """
-    In progress
+    Submits request to SEC API and returns JSON containing multiple years of 
+    company submissions to the SEC.
+
+    Args:
+        search_val (str): Company name (e.g., 'Microsoft Corporation') to search
+        user_agent (str): Name and email to be included with data request to SEC 
+            API. This is required to submit the request. This field is formatted
+            'FirstName LastName email@domain'.
+        exact (bool, default True): Whether or not to match records along exact
+            company name match. For example, if True, 'Microsoft' will not match
+            to 'Microsoft Corporation'. On the flip side, if False, 'Apple' will match
+            to 'Apple Inc' and other companies like 'Apple Hospitality REIT, Inc.'
+
+    Returns:
+        dictionary: Raw JSON output returned from request sent to SEC API.
     """
 
     # get the cik number
-    cik_df = hf.parse_tickers(search_val, hf.get_cik_values, exact=True)
+    cik_df = hf.parse_tickers(search_val, hf.get_cik_values, exact = exact)
 
     # use cik number acquired above to query
     cik = cik_df['cik_str'].astype(str).str.pad(10, side = 'left', fillchar = '0')
@@ -29,17 +44,37 @@ def get_company_facts_json(search_val, user_agent):
     # create header for request to sec api (requires an email address)
     header = {'User-Agent': user_agent}
 
-    r = requests.get(url, headers=header)
+    r = requests.get(url, headers = header)
 
     # extract us gaap elements from data
     gaap = r.json()['facts']['us-gaap']
 
+    return gaap
 
 
 
-def company_facts_df(search_val, user_agent):
+
+def company_facts_df(search_val, user_agent, 
+                     export = False, outpath = None):
     """
-    In progress
+    Pull all company facts as dataframe.
+
+    Args:
+        search_val (str): Company name (e.g., 'Microsoft Corporation') to search
+        user_agent (str): Name and email to be included with data request to SEC 
+            API. This is required to submit the request. This field is formatted
+            'FirstName LastName email@domain'.
+        exact (bool, default True): Whether or not to match records along exact
+            company name match. For example, if True, 'Microsoft' will not match
+            to 'Microsoft Corporation'. On the flip side, if False, 'Apple' will match
+            to 'Apple Inc' and other companies like 'Apple Hospitality REIT, Inc.'
+        export (default, False): Binary indicating whether the resulting dataframe
+            should be export to CSV.
+        outpath (default, None): Path to export assuming export param is set to True.
+
+    Returns:
+        dataframe: a dataframe containing all the company facts in recent years
+            from the queried company
     """
 
     # get json with company fact data
@@ -97,5 +132,13 @@ def company_facts_df(search_val, user_agent):
 
     df = pd.DataFrame(d)
 
+    if export:
+
+        # get path to out dir
+        full_path = str(os.getcwd()) + str(utils.get_config('edgar.ini')['OUTPATH']) + outpath
+        
+        df.to_csv(full_path)
+
     return df
 
+# ran above for apple inc.
