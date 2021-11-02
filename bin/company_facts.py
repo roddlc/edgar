@@ -150,6 +150,3 @@ def company_facts_df(search_val, user_agent,
 
     return df
 
-# ran above for apple inc.
-company_facts_df('Apple Inc', 'Rod de las Casas roddlc90@gmail.com',
-                        export = True, outfile = 'appl.csv')
