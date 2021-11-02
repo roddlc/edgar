@@ -55,7 +55,7 @@ def get_company_facts_json(search_val, user_agent, exact = True):
 
 
 def company_facts_df(search_val, user_agent, 
-                     export = False, outpath = None):
+                     export = False, outfile = None):
     """
     Pull all company facts as dataframe.
 
@@ -89,6 +89,8 @@ def company_facts_df(search_val, user_agent,
     form_l = []
     filed_l = []
     fy_l = []
+    quarter_l = []
+    end_l = []
 
     for key in facts.keys():
             
@@ -119,6 +121,12 @@ def company_facts_df(search_val, user_agent,
             fy = facts[key]['units'][unit][n]['fy']
             fy_l.append(fy)
 
+            end = facts[key]['units'][unit][n]['end']
+            end_l.append(end)
+
+            quarter = facts[key]['units'][unit][n]['fp']
+            quarter_l.append(quarter)
+
     # create dictionary containing values
     d = {
         'key': key_l,
@@ -126,6 +134,7 @@ def company_facts_df(search_val, user_agent,
         'unit': unit_l,
         'val': val_l,
         'form': form_l,
+        'end': end_l,
         'filed': filed_l,
         'fy': fy_l
     }
@@ -135,10 +144,12 @@ def company_facts_df(search_val, user_agent,
     if export:
 
         # get path to out dir
-        full_path = str(os.getcwd()) + str(utils.get_config('edgar.ini')['OUTPATH']) + outpath
+        full_path = str(os.getcwd()) + str(utils.get_config('edgar.ini')['OUTPATH']) + outfile
         
         df.to_csv(full_path)
 
     return df
 
 # ran above for apple inc.
+company_facts_df('Apple Inc', 'Rod de las Casas roddlc90@gmail.com',
+                        export = True, outfile = 'appl.csv')
