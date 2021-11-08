@@ -5,6 +5,8 @@ import requests
 import os
 import sys
 import json
+
+from requests.api import head
 import utils
 
 
@@ -121,6 +123,26 @@ def get_submission_metadata(search_val,
 
     return df
 
+
+def get_summary_xml(search_val, lookup_table, user_agent, exact = True):
+
+    archives_base = utils.get_config('edgar.ini')['ARCHIVES_DIR_BASE']
+
+    cik_df = parse_tickers(search_val, get_cik_values, exact)
+
+    # extract ticker from cik (a dataframe)
+    #cik = cik_df['cik_str'].astype(str).str.pad(10, side = 'left', fillchar = '0')
+    cik = '789019' # using microsoft for testing
+    submission = '000156459021051992' # using a specific filing for testing
+
+    full_path = os.path.join(archives_base, cik, submission, 'FilingSummary.xml')
+
+    header = {'User-Agent': user_agent}
+
+    xml = requests.get(full_path, headers = header)
+    xml = xml.content
+
+    return xml
 
 
 
