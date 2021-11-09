@@ -1,4 +1,5 @@
 
+from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
 import requests
@@ -124,19 +125,21 @@ def get_submission_metadata(search_val,
     return df
 
 
-def get_summary_xml(search_val, lookup_table, user_agent, exact = True):
+def get_summary_xml(search_val, 
+                    #lookup_table, 
+                    submission, # consider connecting w/ metadata function
+                    user_agent, 
+                    exact = True):
 
     archives_base = utils.get_config('edgar.ini')['ARCHIVES_DIR_BASE']
 
     cik_df = parse_tickers(search_val, get_cik_values, exact)
 
     # extract ticker from cik (a dataframe)
-    #cik = cik_df['cik_str'].astype(str).str.pad(10, side = 'left', fillchar = '0')
-    cik = '789019' # using microsoft for testing
-    submission = '000156459021051992' # using a specific filing for testing
+    cik = cik_df['cik_str'].astype(str).str.pad(10, side = 'left', fillchar = '0')
 
-    full_path = os.path.join(archives_base, cik, submission, 'FilingSummary.xml')
-
+    full_path = os.path.join(archives_base, cik[0], submission, 'FilingSummary.xml')
+    print(full_path)
     header = {'User-Agent': user_agent}
 
     xml = requests.get(full_path, headers = header)
@@ -145,5 +148,40 @@ def get_summary_xml(search_val, lookup_table, user_agent, exact = True):
     return xml
 
 
+def get_financial_report_metadata(search_val,
+                                  submission,
+                                  user_agent,
+                                  exact = True):
+    
+    cik_df = parse_tickers(search_val, get_cik_values, exact)
 
+    # extract ticker from cik (a dataframe)
+    cik = cik_df['cik_str'].astype(str).str.pad(10, side = 'left', fillchar = '0')
+    cik = cik[0]
+    
+    # for loop below will append dictionaries containing metadata for various
+    # financial reports for the filing in question (e.g., income statement,
+    # balance sheet
+    metadata = []
+
+    # build base url that will be used for each report
+    base = utils.get_config('edgar.ini')['ARCHIVES_DIR_BASE']
+
+    xml = get_summary_xml(search_val, submission, user_agent, exact = True)
+
+    soup = BeautifulSoup(xml, 'lxml')
+
+    reports = soup.find('myreports')
+
+    for report in reports.find_all('report')[:-1]:
+        data = {}
+        data['report_short_name'] = report.shortname.text
+        data['report_long_name'] = report.longname.text
+        data['report_url'] = os.path.join(base + cik + submission + report.htmlfilename.text)
+
+        metadata.append(data)
+    
+    metadata_df = pd.DataFrame(metadata)
+
+    return metadata_df
 
