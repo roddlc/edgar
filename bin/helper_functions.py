@@ -130,6 +130,24 @@ def get_summary_xml(search_val,
                     submission, # consider connecting w/ metadata function
                     user_agent, 
                     exact = True):
+    """
+    Return xml content containing summary information for any given filing.
+
+    Args:
+        search_val (str): Company name (e.g., 'Microsoft Corporation') to search.
+        submission (str): Unique ID for the submission.
+        ser_agent (str): Name and email to be included with data request to SEC 
+            API. This is required to submit the request. This field is formatted
+            'FirstName LastName email@domain'.
+        exact (bool, default True): Whether or not to match records along exact
+            company name match. For example, if True, 'Microsoft' will not match
+            to 'Microsoft Corporation'. On the flip side, if False, 'Apple' will match
+            to 'Apple Inc' and other companies like 'Apple Hospitality REIT, Inc.'
+    
+    Returns:
+        xml content: Contains metadata specific to a particular filing.
+
+    """
 
     archives_base = utils.get_config('edgar.ini')['ARCHIVES_DIR_BASE']
 
