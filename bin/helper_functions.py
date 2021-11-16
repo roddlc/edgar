@@ -136,7 +136,7 @@ def get_summary_xml(search_val,
     Args:
         search_val (str): Company name (e.g., 'Microsoft Corporation') to search.
         submission (str): Unique ID for the submission.
-        ser_agent (str): Name and email to be included with data request to SEC 
+        user_agent (str): Name and email to be included with data request to SEC 
             API. This is required to submit the request. This field is formatted
             'FirstName LastName email@domain'.
         exact (bool, default True): Whether or not to match records along exact
@@ -146,7 +146,6 @@ def get_summary_xml(search_val,
     
     Returns:
         xml content: Contains metadata specific to a particular filing.
-
     """
 
     archives_base = utils.get_config('edgar.ini')['ARCHIVES_DIR_BASE']
@@ -170,6 +169,23 @@ def get_financial_report_metadata(search_val,
                                   submission,
                                   user_agent,
                                   exact = True):
+    """
+    Parse raw xml containing submission metadata.
+
+    Args:
+        search_val (str): Company name (e.g., 'Microsoft Corporation') to search.
+        submission (str): Unique ID for the submission.
+        user_agent (str): Name and email to be included with data request to SEC 
+            API. This is required to submit the request. This field is formatted
+            'FirstName LastName email@domain'.
+        exact (bool, default True): Whether or not to match records along exact
+            company name match. For example, if True, 'Microsoft' will not match
+            to 'Microsoft Corporation'. On the flip side, if False, 'Apple' will match
+            to 'Apple Inc' and other companies like 'Apple Hospitality REIT, Inc.'
+    
+    Returns:
+        dataframe: DataFrame containing parsed information from summary xml.
+    """
     
     cik_df = parse_tickers(search_val, get_cik_values, exact)
 
