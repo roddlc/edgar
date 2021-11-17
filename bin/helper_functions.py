@@ -17,7 +17,7 @@ the SEC EDGAR API.
 """
 
 
-def get_cik_values():
+def get_cik_and_ticker_values():
     """
     Pull CIK, ticker, and company title combinations from the SEC API. This
     function leverages the link in the edgar.ini file.
@@ -51,7 +51,6 @@ def parse_tickers(search_val, lookup_table, exact = True):
     
     Returns:
         dataframe: records from lookup_table that match with search_val.
-
     """
     
     search_val = search_val.lower()
