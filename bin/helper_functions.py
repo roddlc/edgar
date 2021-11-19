@@ -132,7 +132,7 @@ def get_submission_metadata(search_val,
                 - form (e.g., 10-K, 10-Q)
     """
 
-    cik_df = parse_tickers(search_val, get_cik_values, exact)
+    cik_df = parse_tickers(search_val, exact)
 
     # extract ticker from cik (a dataframe)
     cik = cik_df['cik_str'].astype(str).str.pad(10, side = 'left', fillchar = '0')
@@ -177,7 +177,7 @@ def get_summary_xml(search_val,
 
     archives_base = utils.get_config('edgar.ini')['ARCHIVES_DIR_BASE']
 
-    cik_df = parse_tickers(search_val, get_cik_values, exact)
+    cik_df = parse_tickers(search_val, exact)
 
     # extract ticker from cik (a dataframe)
     cik = cik_df['cik_str'].astype(str).str.pad(10, side = 'left', fillchar = '0')
@@ -214,7 +214,7 @@ def get_financial_report_metadata(search_val,
         dataframe: DataFrame containing parsed information from summary xml.
     """
     
-    cik_df = parse_tickers(search_val, get_cik_values, exact)
+    cik_df = parse_tickers(search_val, exact)
 
     # extract ticker from cik (a dataframe)
     cik = cik_df['cik_str'].astype(str).str.pad(10, side = 'left', fillchar = '0')
