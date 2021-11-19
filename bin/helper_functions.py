@@ -36,13 +36,13 @@ def get_cik_and_ticker_values():
     return df
 
 
-def parse_tickers(search_val, lookup_table, exact = True):
+def parse_tickers(search_val, exact = True):
     """
     Parse the tickers for specific company names (e.g., Apple, Microsoft).
 
     Args:
-        search_val (str): Company name as listed on stock market exchange 
-            (e.g., 'Apple Inc.', 'Microsoft Corporation').
+        search_val (str): Company name or ticker as listed on stock market exchange 
+            (e.g., 'Apple Inc.'or 'AAPL'; 'Microsoft Corporation' or 'MSFT').
         lookup_table (dataframe): Table to be searched for search_val.
         exact (bool): Specifies if company name should be exact or partial
             match to company's name on stock exchange (e.g., 'Apple Inc' v.
@@ -57,7 +57,7 @@ def parse_tickers(search_val, lookup_table, exact = True):
 
     # run the function created above and have it be assigned to df var to 
     # facilitate query
-    df = lookup_table()
+    df = get_cik_and_ticker_values()
 
     # duplicate the title column, but with whitespace and punctuation removed
     # so that minor things like 'Apple Inc' v 'Apple Inc.' don't cause search
@@ -69,11 +69,39 @@ def parse_tickers(search_val, lookup_table, exact = True):
 
     # search for company name
     if exact:
-        search_val = ''.join(s for s in search_val if s.isalnum())
-        result = df[df['title_exact'] == search_val]
+        
+        try:
+            search_val = ''.join(s for s in search_val if s.isalnum())
+            
+            # check company name
+            name_match = df[df['title_exact'] == search_val]
+
+            # check ticker
+            ticker_match = df[df['ticker'].str.lower() == search_val]
+
+            # include a check for empty search result
+            if len(name_match) == 0 and len(ticker_match) == 0:
+                #print('Error')
+                raise ValueError
+                
+        except ValueError: # consider adding a logger to create log files
+            print('The search came up empty.')
     
     else:
-        result = df[df['title'].str.contains(search_val, case = False)]
+
+        name_match = df[df['title'].str.contains(search_val, case = False)]
+
+        ticker_match = df[df['ticker'].str.contains(search_val, case = False)]
+    
+    # select result
+    if len(name_match) == 0 and len(ticker_match) > 0:
+        result = ticker_match
+
+    elif len(name_match) > 0 and len(ticker_match) == 0:
+        result = name_match
+    
+    elif len(name_match) > 0 and len(ticker_match) > 0:
+        raise Exception('Returned both a name and ticker match')
     
     return result
 
