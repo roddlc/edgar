@@ -182,7 +182,7 @@ def get_summary_xml(search_val,
     # extract ticker from cik (a dataframe)
     cik = cik_df['cik_str'].astype(str).str.pad(10, side = 'left', fillchar = '0')
 
-    full_path = os.path.join(archives_base, cik[0], submission, 'FilingSummary.xml')
+    full_path = os.path.join(archives_base, cik.values[0], submission, 'FilingSummary.xml')
     print(full_path)
     header = {'User-Agent': user_agent}
 
@@ -195,6 +195,7 @@ def get_summary_xml(search_val,
 def get_financial_report_metadata(search_val,
                                   submission,
                                   user_agent,
+                                  csv_path = None,
                                   exact = True):
     """
     Parse raw xml containing submission metadata.
@@ -205,6 +206,8 @@ def get_financial_report_metadata(search_val,
         user_agent (str): Name and email to be included with data request to SEC 
             API. This is required to submit the request. This field is formatted
             'FirstName LastName email@domain'.
+        csv_path (str, default None): path to output text file of metadata. If None,
+            a dataframe will be returned in the console.
         exact (bool, default True): Whether or not to match records along exact
             company name match. For example, if True, 'Microsoft' will not match
             to 'Microsoft Corporation'. On the flip side, if False, 'Apple' will match
@@ -218,7 +221,7 @@ def get_financial_report_metadata(search_val,
 
     # extract ticker from cik (a dataframe)
     cik = cik_df['cik_str'].astype(str).str.pad(10, side = 'left', fillchar = '0')
-    cik = cik[0]
+    cik = cik.values[0]
     
     # for loop below will append dictionaries containing metadata for various
     # financial reports for the filing in question (e.g., income statement,
@@ -244,5 +247,9 @@ def get_financial_report_metadata(search_val,
     
     metadata_df = pd.DataFrame(metadata)
 
+    if csv_path:
+
+        metadata_df.to_csv(csv_path, index = False)
+    
     return metadata_df
 
