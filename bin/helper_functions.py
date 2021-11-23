@@ -241,7 +241,7 @@ def get_financial_report_metadata(search_val,
         data = {}
         data['report_short_name'] = report.shortname.text
         data['report_long_name'] = report.longname.text
-        data['report_url'] = os.path.join(base + cik + submission + report.htmlfilename.text)
+        data['report_url'] = os.path.join(base, cik, submission, report.htmlfilename.text)
 
         metadata.append(data)
     
