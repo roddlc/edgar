@@ -1,0 +1,86 @@
+report_short_name,report_long_name,report_url
+Document and Entity Information,100000 - Document - Document and Entity Information,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R1.htm
+INCOME STATEMENTS,100010 - Statement - INCOME STATEMENTS,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R2.htm
+COMPREHENSIVE INCOME STATEMENTS,100020 - Statement - COMPREHENSIVE INCOME STATEMENTS,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R3.htm
+BALANCE SHEETS,100030 - Statement - BALANCE SHEETS,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R4.htm
+BALANCE SHEETS (Parenthetical),100040 - Statement - BALANCE SHEETS (Parenthetical),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R5.htm
+CASH FLOWS STATEMENTS,100050 - Statement - CASH FLOWS STATEMENTS,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R6.htm
+STOCKHOLDERS' EQUITY STATEMENTS,100060 - Statement - STOCKHOLDERS' EQUITY STATEMENTS,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R7.htm
+ACCOUNTING POLICIES,100070 - Disclosure - ACCOUNTING POLICIES,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R8.htm
+EARNINGS PER SHARE,100080 - Disclosure - EARNINGS PER SHARE,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R9.htm
+"OTHER INCOME (EXPENSE), NET","100090 - Disclosure - OTHER INCOME (EXPENSE), NET",https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R10.htm
+INVESTMENTS,100100 - Disclosure - INVESTMENTS,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R11.htm
+DERIVATIVES,100110 - Disclosure - DERIVATIVES,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R12.htm
+INVENTORIES,100120 - Disclosure - INVENTORIES,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R13.htm
+BUSINESS COMBINATIONS,100130 - Disclosure - BUSINESS COMBINATIONS,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R14.htm
+GOODWILL,100140 - Disclosure - GOODWILL,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R15.htm
+INTANGIBLE ASSETS,100150 - Disclosure - INTANGIBLE ASSETS,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R16.htm
+DEBT,100160 - Disclosure - DEBT,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R17.htm
+INCOME TAXES,100170 - Disclosure - INCOME TAXES,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R18.htm
+UNEARNED REVENUE,100180 - Disclosure - UNEARNED REVENUE,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R19.htm
+LEASES,100190 - Disclosure - LEASES,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R20.htm
+CONTINGENCIES,100200 - Disclosure - CONTINGENCIES,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R21.htm
+STOCKHOLDERS' EQUITY,100210 - Disclosure - STOCKHOLDERS' EQUITY,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R22.htm
+ACCUMULATED OTHER COMPREHENSIVE INCOME (LOSS),100220 - Disclosure - ACCUMULATED OTHER COMPREHENSIVE INCOME (LOSS),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R23.htm
+SEGMENT INFORMATION AND GEOGRAPHIC DATA,100230 - Disclosure - SEGMENT INFORMATION AND GEOGRAPHIC DATA,https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R24.htm
+ACCOUNTING POLICIES (Policies),100240 - Disclosure - ACCOUNTING POLICIES (Policies),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R25.htm
+EARNINGS PER SHARE (Tables),100250 - Disclosure - EARNINGS PER SHARE (Tables),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R26.htm
+"OTHER INCOME (EXPENSE), NET (Tables)","100260 - Disclosure - OTHER INCOME (EXPENSE), NET (Tables)",https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R27.htm
+INVESTMENTS (Tables),100270 - Disclosure - INVESTMENTS (Tables),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R28.htm
+DERIVATIVES (Tables),100280 - Disclosure - DERIVATIVES (Tables),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R29.htm
+INVENTORIES (Tables),100290 - Disclosure - INVENTORIES (Tables),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R30.htm
+GOODWILL (Tables),100300 - Disclosure - GOODWILL (Tables),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R31.htm
+INTANGIBLE ASSETS (Tables),100310 - Disclosure - INTANGIBLE ASSETS (Tables),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R32.htm
+DEBT (Tables),100320 - Disclosure - DEBT (Tables),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R33.htm
+UNEARNED REVENUE (Tables),100330 - Disclosure - UNEARNED REVENUE (Tables),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R34.htm
+LEASES (Tables),100340 - Disclosure - LEASES (Tables),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R35.htm
+STOCKHOLDERS' EQUITY (Tables),100350 - Disclosure - STOCKHOLDERS' EQUITY (Tables),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R36.htm
+ACCUMULATED OTHER COMPREHENSIVE INCOME (LOSS) (Tables),100360 - Disclosure - ACCUMULATED OTHER COMPREHENSIVE INCOME (LOSS) (Tables),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R37.htm
+SEGMENT INFORMATION AND GEOGRAPHIC DATA (Tables),100370 - Disclosure - SEGMENT INFORMATION AND GEOGRAPHIC DATA (Tables),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R38.htm
+Accounting Policies - Additional Information (Detail),100380 - Disclosure - Accounting Policies - Additional Information (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R39.htm
+Basic and Diluted Earnings Per Share (Detail),100390 - Disclosure - Basic and Diluted Earnings Per Share (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R40.htm
+"Components of Other Income (Expense), Net (Detail)","100400 - Disclosure - Components of Other Income (Expense), Net (Detail)",https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R41.htm
+Net Recognized Gains (Losses) on Debt Investments (Detail),100410 - Disclosure - Net Recognized Gains (Losses) on Debt Investments (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R42.htm
+Net Recognized Gains (Losses) on Equity Investments (Detail),100420 - Disclosure - Net Recognized Gains (Losses) on Equity Investments (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R43.htm
+Investment Components (Detail),100430 - Disclosure - Investment Components (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R44.htm
+Investments - Additional Information (Detail),100440 - Disclosure - Investments - Additional Information (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R45.htm
+Unrealized Losses on Debt Investments (Detail),100450 - Disclosure - Unrealized Losses on Debt Investments (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R46.htm
+Debt Investment Maturities (Detail),100460 - Disclosure - Debt Investment Maturities (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R47.htm
+Derivatives - Additional Information (Detail),100470 - Disclosure - Derivatives - Additional Information (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R48.htm
+Notional Amounts of Outstanding Derivative Instruments Measured in U.S. Dollar Equivalents (Detail),100480 - Disclosure - Notional Amounts of Outstanding Derivative Instruments Measured in U.S. Dollar Equivalents (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R49.htm
+Fair Values of Derivative Instruments (Detail),100490 - Disclosure - Fair Values of Derivative Instruments (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R50.htm
+Gains (Losses) on Derivative Instruments Recognized on Consolidated Income Statements (Detail),100500 - Disclosure - Gains (Losses) on Derivative Instruments Recognized on Consolidated Income Statements (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R51.htm
+"Gains (Losses), Net of Tax, on Derivative Instruments Recognized on Consolidated Comprehensive Income Statements (Detail)","100510 - Disclosure - Gains (Losses), Net of Tax, on Derivative Instruments Recognized on Consolidated Comprehensive Income Statements (Detail)",https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R52.htm
+Components of Inventories (Detail),100520 - Disclosure - Components of Inventories (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R53.htm
+Business Combinations - Additional Information (Detail),100530 - Disclosure - Business Combinations - Additional Information (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R54.htm
+Carrying Amount of Goodwill (Detail),100540 - Disclosure - Carrying Amount of Goodwill (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R55.htm
+Finite-Lived Intangible Assets (Detail),100550 - Disclosure - Finite-Lived Intangible Assets (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R56.htm
+Intangible Assets - Additional Information (Detail),100560 - Disclosure - Intangible Assets - Additional Information (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R57.htm
+Estimated Future Amortization Expense Related to Intangible Assets (Detail),100570 - Disclosure - Estimated Future Amortization Expense Related to Intangible Assets (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R58.htm
+Debt (Detail),100580 - Disclosure - Debt (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R59.htm
+Debt (Parenthetical) (Detail),100600 - Disclosure - Debt (Parenthetical) (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R60.htm
+Debt - Additional Information (Detail),100610 - Disclosure - Debt - Additional Information (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R61.htm
+Maturities of Long-term Debt Including Current Portion (Detail),100620 - Disclosure - Maturities of Long-term Debt Including Current Portion (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R62.htm
+Income Taxes - Additional Information (Detail),100630 - Disclosure - Income Taxes - Additional Information (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R63.htm
+Income Taxes - Additional Information Regarding Examinations (Detail),100640 - Disclosure - Income Taxes - Additional Information Regarding Examinations (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R64.htm
+Unearned Revenue by Segment (Detail),100650 - Disclosure - Unearned Revenue by Segment (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R65.htm
+Changes in Unearned Revenue (Detail),100660 - Disclosure - Changes in Unearned Revenue (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R66.htm
+Unearned Revenue - Additional Information (Detail),100670 - Disclosure - Unearned Revenue - Additional Information (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R67.htm
+Unearned Revenue - Remaining Performance Obligation - Additional Information (Detail),100680 - Disclosure - Unearned Revenue - Remaining Performance Obligation - Additional Information (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R68.htm
+Leases - Additional Information (Detail),100690 - Disclosure - Leases - Additional Information (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R69.htm
+Components of Lease Expense (Detail),100700 - Disclosure - Components of Lease Expense (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R70.htm
+Supplemental Cash Flow Information Related to Leases (Detail),100710 - Disclosure - Supplemental Cash Flow Information Related to Leases (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R71.htm
+Supplemental Balance Sheet Information Related to Leases (Detail),100720 - Disclosure - Supplemental Balance Sheet Information Related to Leases (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R72.htm
+Maturities of Lease Liabilities (Detail),100730 - Disclosure - Maturities of Lease Liabilities (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R73.htm
+Contingencies - Additional Information (Detail),100750 - Disclosure - Contingencies - Additional Information (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R74.htm
+Stockholders' Equity - Additional Information (Detail),100760 - Disclosure - Stockholders' Equity - Additional Information (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R75.htm
+Share Repurchases (Detail),100770 - Disclosure - Share Repurchases (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R76.htm
+Dividends Declared (Detail),100780 - Disclosure - Dividends Declared (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R77.htm
+Summary of Changes in Accumulated Other Comprehensive Income (Loss) by Component (Detail),100790 - Disclosure - Summary of Changes in Accumulated Other Comprehensive Income (Loss) by Component (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R78.htm
+Summary of Changes in Accumulated Other Comprehensive Income (Loss) by Component (Parenthetical) (Detail),100800 - Disclosure - Summary of Changes in Accumulated Other Comprehensive Income (Loss) by Component (Parenthetical) (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R79.htm
+Segment Revenue (Detail),100810 - Disclosure - Segment Revenue (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R80.htm
+Operating Income (Loss) by Segment (Detail),100820 - Disclosure - Operating Income (Loss) by Segment (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R81.htm
+Segment Information and Geographic Data - Additional Information (Detail),100830 - Disclosure - Segment Information and Geographic Data - Additional Information (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R82.htm
+Revenue Classified by Major Geographic Areas (Detail),100840 - Disclosure - Revenue Classified by Major Geographic Areas (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R83.htm
+Revenue Classified by Significant Product and Service Offerings (Detail),100850 - Disclosure - Revenue Classified by Significant Product and Service Offerings (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R84.htm
+Revenue Classified by Significant Product and Service Offerings (Parenthetical) (Detail),100860 - Disclosure - Revenue Classified by Significant Product and Service Offerings (Parenthetical) (Detail),https://www.sec.gov/Archives/edgar/data/0000789019/000156459021002316/R85.htm

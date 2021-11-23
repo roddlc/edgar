@@ -250,6 +250,8 @@ def get_financial_report_metadata(search_val,
     if csv_path:
 
         metadata_df.to_csv(csv_path, index = False)
+        print('out')
     
     return metadata_df
 
+#get_financial_report_metadata('MSFT', '000156459021002316', user_agent = 'test@test', csv_path='out/msft_10q_jan_2021.txt')
