@@ -183,7 +183,7 @@ def get_summary_xml(search_val,
     cik = cik_df['cik_str'].astype(str).str.pad(10, side = 'left', fillchar = '0')
 
     full_path = os.path.join(archives_base, cik.values[0], submission, 'FilingSummary.xml')
-    
+
     header = {'User-Agent': user_agent}
 
     xml = requests.get(full_path, headers = header)
@@ -192,6 +192,7 @@ def get_summary_xml(search_val,
     return xml
 
 
+#! consider moving this function to submission_text.py
 def get_financial_report_metadata(search_val,
                                   submission,
                                   user_agent,
