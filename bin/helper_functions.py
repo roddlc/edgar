@@ -183,7 +183,7 @@ def get_summary_xml(search_val,
     cik = cik_df['cik_str'].astype(str).str.pad(10, side = 'left', fillchar = '0')
 
     full_path = os.path.join(archives_base, cik.values[0], submission, 'FilingSummary.xml')
-    print(full_path)
+    
     header = {'User-Agent': user_agent}
 
     xml = requests.get(full_path, headers = header)
