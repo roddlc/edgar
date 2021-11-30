@@ -48,22 +48,24 @@ def get_financial_statement(search_val,
     if statement == "Income Statement":
 
         url = xml.query('report_short_name == "INCOME STATEMENTS"')['report_url'].tolist()[0]
-        print(url)
 
         header = {'User-Agent': user_agent}
         r = requests.get(url, headers = header)
 
-    #print(r.content)
-
     elif statement == "Balance Sheet": #! consider replacing == with list of acceptable values for a .contains + casing = False
 
-        # <code here>
-        print('this is a placeholder')
+        url = xml.query('report_short_name == "BALANCE SHEETS"')['report_url'].tolist()[0]
+        
+        header = {'User-Agent': user_agent}
+        r = requests.get(url, headers = header)
 
     elif statement == "Cash Flow":
 
-        # <code here>
-        print('this is a placeholder')
+        url = xml.query('report_short_name == "CASH FLOWS STATEMENTS"')['report_url'].tolist()[0]
+        
+        header = {'User-Agent': user_agent}
+        r = requests.get(url, headers = header)
+        print(r)
     
     else:
 
@@ -71,8 +73,9 @@ def get_financial_statement(search_val,
 
     # having received web content, pivot to beautiful soup
 
-    soup = BeautifulSoup(r, 'html')
+    soup = BeautifulSoup(r.content, 'html')
 
     # parse soup and create dataframe
+    #! apply function to parse soup here
 
-    # more here..
+    #! build dataframe
