@@ -16,6 +16,38 @@ available by SEC to create clean dataframes for export.
 """
 
 # consider creating a class to process text data..
+def parse_soup(soup):
+    
+    # data to be populated by for loop below
+    data = {}
+    data['values'] = []
+    data['section_divs'] = []
+    data['col_headers'] = []
+    
+    for i, row in enumerate(soup.table.find_all('tr')):
+
+        # get regular data (no header)
+        if len(row.find_all('th')) == 0 and len(row.find_all('strong')) == 0:
+
+            val = [i] + [r.text.strip() for r in row.find_all('td')]
+            #print(val)
+            data['values'].append(val)
+
+        # get section divider
+        elif len(row.find_all('th')) == 0 and len(row.find_all('strong')) != 0:
+
+            section_div = [i] + [r.text.strip() for r in row.find_all('td')]
+            #print(section_div)
+            data['section_divs'].append(section_div)
+
+        elif len(row.find_all('th')) != 0:
+
+            header = [r.text.strip() for r in row.find_all('th')]
+            #print(header)
+            data['col_headers'].append(header)
+    
+    return data
+
 
 def get_financial_statement(search_val,
                             submission,
