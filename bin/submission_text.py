@@ -49,6 +49,30 @@ def parse_soup(soup):
     return data
 
 
+def make_df(data_dict):
+
+    # create header columns
+    headers_str = list(map(str, data_dict['col_headers'][0]))
+    # we remove elements like '3 months listed'
+    headers_str = [x for x in headers_str if 'Months' not in x and not x.isdigit()]
+    
+    # populate dataframe with data and section dividers
+    df = pd.DataFrame(data_dict['values'] + data_dict['section_divs'])
+    # sort on index created by enumerate in parse_soup() above
+    df.sort_values(by = 0, inplace = True)
+
+    # now that data is sorted, we can drop 0
+    df.drop([0], axis = 1, inplace = True)
+
+    # create the column headers for the data
+    new_col_headers = list(map(str, df['col_headers'][1]))
+    new_col_headers = [x for x in new_col_headers if not x.isdigit()]
+
+    df.columns = headers_str + new_col_headers
+    
+    #! add steos to remove $, empty space, commas, etc.
+
+
 def get_financial_statement(search_val,
                             submission,
                             user_agent,
