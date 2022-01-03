@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import requests
 from requests.api import request
-import helper_functions as hf
+#import helper_functions as hf
 import utils
 import json
 import os
@@ -33,7 +33,7 @@ def get_company_facts_json(search_val, user_agent, exact = True):
     """
 
     # get the cik number
-    cik_df = hf.parse_tickers(search_val, hf.get_cik_values, exact = exact)
+    cik_df = utils.parse_tickers(search_val, utils.get_cik_values, exact = exact)
 
     # use cik number acquired above to query
     cik = cik_df['cik_str'].astype(str).str.pad(10, side = 'left', fillchar = '0')

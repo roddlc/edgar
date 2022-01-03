@@ -3,7 +3,7 @@ import numpy as np
 from bs4 import BeautifulSoup
 import os
 import utils
-import helper_functions as hf
+#import helper_functions as hf
 import requests
 
 
@@ -94,7 +94,7 @@ def get_financial_statement(search_val,
         dataframe: DataFrame containing financial statement data for a given submission.
     """
 
-    xml = hf.get_financial_report_metadata(search_val = search_val,
+    xml = utils.get_financial_report_metadata(search_val = search_val,
                                            submission = submission,
                                            user_agent = user_agent)
     
