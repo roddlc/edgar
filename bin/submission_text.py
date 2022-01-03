@@ -132,6 +132,12 @@ def get_financial_statement(search_val,
     soup = BeautifulSoup(r.content, 'html')
 
     # parse soup and create dataframe
-    #! apply function to parse soup here
-
+    parsed_soup = parse_soup(soup)
+    return parse_soup
     #! build dataframe
+
+# test the function above
+get_financial_statement(search_val='MSFT',
+                            submission='000156459021002316',
+                            user_agent='test test@test',
+                            statement='Income Statement')

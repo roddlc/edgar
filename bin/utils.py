@@ -85,7 +85,8 @@ def parse_tickers(search_val, exact = True):
     # duplicate the title column, but with whitespace and punctuation removed
     # so that minor things like 'Apple Inc' v 'Apple Inc.' don't cause search
     # issues
-    df['title_exact'] = df['title'].map(lambda x: ''.join(s for s in x if s.isalnum()))
+    #df['title_exact'] = df['title'].map(lambda x: ''.join(s for s in x if s.isalnum()))
+    df['title_exact'] = df['title'].str.replace(' ', '')
 
     # set to lower case as well to avoid case-related issues
     df['title_exact'] = df['title_exact'].str.lower()
