@@ -47,8 +47,15 @@ def get_cik_and_ticker_values():
     """
 
     url = get_config('edgar.ini')['TICKERS']
-
-    r = requests.get(url)
+    
+    try:
+        r = requests.get(url)
+    except requests.exceptions.ConnectionError as e:
+        print(
+            f"A {type(e).__name__} error occurred.\n"
+            f"Arguments: {e.args}\n"
+            "\nConfirm that your Internet connection is stable."
+        )
 
     nested_dict = r.json()
 
@@ -168,7 +175,14 @@ def get_submission_metadata(search_val,
     # create header for request to sec api (requires an email address)
     header = {'User-Agent': user_agent}
 
-    result = requests.get(url, headers = header)
+    try:
+        result = requests.get(url, headers = header)
+    except requests.exceptions.ConnectionError as e:
+        print(
+            f"A {type(e).__name__} error occurred.\n"
+            f"Arguments: {e.args}\n"
+            "\nConfirm that your Internet connection is stable."
+        )
 
     # get recent filings from the json object
     df = pd.DataFrame(result.json()['filings']['recent'])
@@ -210,7 +224,14 @@ def get_summary_xml(search_val,
 
     header = {'User-Agent': user_agent}
 
-    xml = requests.get(full_path, headers = header)
+    try:
+        xml = requests.get(full_path, headers = header)
+    except requests.exceptions.ConnectionError as e:
+        print(
+            f"A {type(e).__name__} error occurred.\n"
+            f"Arguments: {e.args}\n"
+            "\nConfirm that your Internet connection is stable."
+        )
     xml = xml.content
 
     return xml
