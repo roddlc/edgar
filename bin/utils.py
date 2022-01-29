@@ -89,40 +89,38 @@ def parse_tickers(search_val, exact = True):
     # facilitate query
     df = get_cik_and_ticker_values()
 
-    # duplicate the title column, but with whitespace and punctuation removed
-    # so that minor things like 'Apple Inc' v 'Apple Inc.' don't cause search
-    # issues
-    #df['title_exact'] = df['title'].map(lambda x: ''.join(s for s in x if s.isalnum()))
-    df['title_exact'] = df['title'].str.replace(' ', '')
-
-    # set to lower case as well to avoid case-related issues
-    df['title_exact'] = df['title_exact'].str.lower()
+    # strip title down to just alphanumeric characters
+    df['title_alnum'] = df['title'].apply(lambda x: ''.join(s for s in x if s.isalnum()))\
+        .str.lower()
 
     # search for company name
     if exact:
         
         try:
+            # strip search val to just alnum characters
             search_val = ''.join(s for s in search_val if s.isalnum())
             
             # check company name
-            name_match = df[df['title_exact'] == search_val]
+            name_match = df[df['title_alnum'] == search_val].reset_index()
 
             # check ticker
-            ticker_match = df[df['ticker'].str.lower() == search_val]
+            ticker_match = df[df['ticker'].str.lower() == search_val].reset_index()
 
             # include a check for empty search result
             if len(name_match) == 0 and len(ticker_match) == 0:
-                #print('Error')
                 raise ValueError
                 
         except ValueError: # consider adding a logger to create log files
             print('The search came up empty.')
+            print('Consider trying "exact=False" and seeing if that',
+                    'yields what you are looking for.')
+            exit(1)
     
     else:
 
-        name_match = df[df['title'].str.contains(search_val, case = False)]
+        name_match = df[df['title'].str.contains(search_val, case = False)].reset_index()
 
-        ticker_match = df[df['ticker'].str.contains(search_val, case = False)]
+        ticker_match = df[df['ticker'].str.contains(search_val, case = False)].reset_index()
     
     # select result
     if len(name_match) == 0 and len(ticker_match) > 0:
@@ -168,15 +166,16 @@ def get_submission_metadata(search_val,
     # extract ticker from cik (a dataframe)
     cik = cik_df['cik_str'].astype(str).str.pad(10, side = 'left', fillchar = '0')
 
+    #! need to handle situations where parse_tickers() returns more than one row
 
     # build url
-    url = get_config('edgar.ini')['SUBMISSIONS_BASE'] + cik[0] + '.json'
+    url = get_config('edgar.ini')['SUBMISSIONS_BASE'] + cik + '.json'
 
     # create header for request to sec api (requires an email address)
     header = {'User-Agent': user_agent}
 
     try:
-        result = requests.get(url, headers = header)
+        result = requests.get(url[0], headers = header)
     except requests.exceptions.ConnectionError as e:
         print(
             f"A {type(e).__name__} error occurred.\n"
