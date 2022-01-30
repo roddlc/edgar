@@ -1,3 +1,4 @@
+from multiprocessing.sharedctypes import Value
 import pandas as pd
 import numpy as np
 from bs4 import BeautifulSoup
@@ -40,7 +41,7 @@ class Edgar:
         return(meta)
 
     # consider creating a class to process text data..
-    def parse_soup(self, soup):
+    def __parse_soup(self, soup):
         
         # data to be populated by for loop below
         data = {}
@@ -73,32 +74,35 @@ class Edgar:
         return data
 
     def __make_df(self, data_dict):
-
         # create header columns
         headers_str = list(map(str, data_dict['col_headers'][0]))
-        # we remove elements like '3 months listed'
+
+        # remove elements like '3 months listed'
         headers_str = [x for x in headers_str if 'Months' not in x and not x.isdigit()]
+        
+        # clean up the first column header.. this code could be made more elegant
+        headers_str = [headers_str[0].replace("($)", "").replace(",", " and").replace("  ", " (") + ')']
         
         # populate dataframe with data and section dividers
         df = pd.DataFrame(data_dict['values'] + data_dict['section_divs'])
+        
         # sort on index created by enumerate in parse_soup() above
         df.sort_values(by = 0, inplace = True)
 
         # now that data is sorted, we can drop 0
         df.drop([0], axis = 1, inplace = True)
-
+        
         # create the column headers for the data
-        new_col_headers = list(map(str, df['col_headers'][1]))
+        new_col_headers = list(map(str, data_dict['col_headers'][1]))
         new_col_headers = [x for x in new_col_headers if not x.isdigit()]
 
         df.columns = headers_str + new_col_headers
-        
-        #! add steps to remove $, empty space, commas, etc.
+
+        return df
 
 
-    def get_financial_statement(self, search_val,
+    def get_financial_statement(self, 
                                 submission,
-                                user_agent,
                                 statement = None):
 
         """
@@ -116,53 +120,67 @@ class Edgar:
         Returns:
             dataframe: DataFrame containing financial statement data for a given submission.
         """
-
-        xml = utils.get_financial_report_metadata(search_val = search_val,
-                                            submission = submission,
-                                            user_agent = user_agent)
+        print('exact:', self.exact)
+        xml = utils.get_financial_report_metadata(search_val = self.company,
+                                                  user_agent = self.user_agent,
+                                                  exact = self.exact,
+                                                  submission = submission)
         
         # depending on statement arg passed, select the report_url for that statement
         # e.g., if "Income Statement", select report_url for https://www.sec.gov/Archives/edgar/data/789019/000156459021051992/R2.htm
 
-        if statement == "Income Statement":
+        try:
 
-            url = xml.query('report_short_name == "INCOME STATEMENTS"')['report_url'].tolist()[0]
+            if statement == "Income Statement":
 
-            header = {'User-Agent': user_agent}
-            r = requests.get(url, headers = header)
+                url = xml.query('report_short_name == "INCOME STATEMENTS"')['report_url'].tolist()[0]
 
-        elif statement == "Balance Sheet": #! consider replacing == with list of acceptable values for a .contains + casing = False
+                header = {'User-Agent': self.user_agent}
+                r = requests.get(url, headers = header)
 
-            url = xml.query('report_short_name == "BALANCE SHEETS"')['report_url'].tolist()[0]
+            elif statement == "Balance Sheet": #! consider replacing == with list of acceptable values for a .contains + casing = False
+
+                url = xml.query('report_short_name == "BALANCE SHEETS"')['report_url'].tolist()[0]
+                
+                header = {'User-Agent': self.user_agent}
+                r = requests.get(url, headers = header)
+
+            elif statement == "Cash Flow":
+
+                url = xml.query('report_short_name == "CASH FLOWS STATEMENTS"')['report_url'].tolist()[0]
+                
+                header = {'User-Agent': self.user_agent}
+                r = requests.get(url, headers = header)
+                print(r)
             
-            header = {'User-Agent': user_agent}
-            r = requests.get(url, headers = header)
+            else:
 
-        elif statement == "Cash Flow":
-
-            url = xml.query('report_short_name == "CASH FLOWS STATEMENTS"')['report_url'].tolist()[0]
-            
-            header = {'User-Agent': user_agent}
-            r = requests.get(url, headers = header)
-            print(r)
+                raise ValueError
         
-        else:
-
-            print("Error: You did not provide an acceptable value. Try 'Income Statement', 'Balance Sheet', or 'Cash Flow'")
+        except ValueError:
+            text = (
+                "Only the following values are accepted:"
+                "\tIncome Statement"
+                "\tBalance Sheet"
+                "\tCash Flow"
+            )
+            print(text)
 
         # having received web content, pivot to beautiful soup
 
         soup = BeautifulSoup(r.content, 'html')
 
         # parse soup and create dataframe
-        parsed_soup = Edgar.parse_soup(soup)
-        return Edgar.parse_soup
+        parsed_soup = Edgar.__parse_soup(self, soup)
         
+        # create dataframe
+        df = Edgar.__make_df(self, parsed_soup)
         
-        #! build dataframe
+        return(df)
 
 
-# run some tests below
+# test run of above
 msft = Edgar(company = "MSFT", user_agent="test test@test")
-msft_sub_hist = msft.submission_history()
-msft_sub_hist.to_csv('out/msft_submission_history.txt', index = False)
+msft_10q_20210930_inc_st = msft.get_financial_statement(submission = "000156459021051992",
+                                               statement = "Income Statement")
+msft_10q_20210930_inc_st.to_csv('out/msft_10q_20210930_inc_st.csv', index = False)

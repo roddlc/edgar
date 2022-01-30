@@ -276,9 +276,8 @@ def get_financial_report_metadata(search_val,
     # build base url that will be used for each report
     base = get_config('edgar.ini')['ARCHIVES_DIR_BASE']
 
-    xml = get_summary_xml(search_val, submission, user_agent, exact = True)
-
-    soup = BeautifulSoup(xml, 'lxml')
+    xml = get_summary_xml(search_val, submission, user_agent, exact = exact)
+    soup = BeautifulSoup(xml, "html")
 
     reports = soup.find('myreports')
 
